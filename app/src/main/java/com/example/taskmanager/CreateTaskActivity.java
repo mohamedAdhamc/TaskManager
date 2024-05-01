@@ -6,6 +6,7 @@ import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.os.Bundle;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -62,11 +63,13 @@ public class CreateTaskActivity extends AppCompatActivity {
                         currentDate = String.valueOf(selectedDayOfMonth) +'-'+ String.valueOf(selectedMonth+1) + '-'+String.valueOf(selectedYear);
                         TextView currDateText = findViewById(R.id.dateText);
                         currDateText.setText(currentDate);
+                        ((Button)findViewById(R.id.timeSelectButton)).setEnabled(true);
                     }
 
                 }, currentYear, currentMonth, currentDay);
 
         // Show the DatePickerDialog
+
         datePickerDialog.show();
     }
 
@@ -103,8 +106,9 @@ public class CreateTaskActivity extends AppCompatActivity {
             Toast.makeText(this,"Please fill the description field",Toast.LENGTH_LONG).show();
         }
         else{
-//            Toast.makeText(this,currentTime,Toast.LENGTH_LONG).show();
 //            Toast.makeText(this,currentDate,Toast.LENGTH_LONG).show();
+//            Toast.makeText(this,currentTime,Toast.LENGTH_LONG).show();
+
             //Pass the items to local DB
             ////////////////
             ///////////////

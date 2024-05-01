@@ -87,8 +87,8 @@
     <Button
         android:id="@+id/dateButton"
         style="@style/Widget.AppCompat.Button.Small"
-        android:layout_width="118dp"
-        android:layout_height="38dp"
+        android:layout_width="123dp"
+        android:layout_height="41dp"
         android:layout_marginStart="32dp"
         android:layout_marginTop="20dp"
         android:onClick="selectDate"
@@ -107,12 +107,13 @@
         app:layout_constraintTop_toBottomOf="@+id/dateText" />
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/timeSelectButton"
         style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="120dp"
         android:layout_height="40dp"
         android:layout_marginStart="32dp"
         android:layout_marginTop="16dp"
+        android:enabled="false"
         android:onClick="selectTime"
         android:text="Select"
         app:layout_constraintStart_toEndOf="@+id/timeText"
