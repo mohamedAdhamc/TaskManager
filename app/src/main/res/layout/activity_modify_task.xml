@@ -1,9 +1,156 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ModifyTaskActivity">
+    android:layout_width="409dp"
+    android:layout_height="729dp"
+    android:contentDescription="@string/scrollDescription"
+    android:fillViewport="true"
+    tools:layout_editor_absoluteX="1dp"
+    tools:layout_editor_absoluteY="1dp">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:context=".ModifyTaskActivity">
+
+        <EditText
+            android:id="@+id/nameView"
+            android:layout_width="305dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="140dp"
+            android:ems="10"
+            android:gravity="start|top"
+            android:hint="@string/nameEditTextDefault"
+            android:inputType="textMultiLine"
+            android:minHeight="48dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/descriptionView"
+            android:layout_width="305dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:ems="10"
+            android:gravity="start|top"
+            android:hint="@string/descriptionTextDefault"
+            android:inputType="textMultiLine"
+            android:minHeight="48dp"
+            app:layout_constraintStart_toStartOf="@+id/nameView"
+            app:layout_constraintTop_toBottomOf="@+id/nameView" />
+
+        <TextView
+            android:id="@+id/priorityLb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="52dp"
+            android:text="@string/priorityLabelText"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="@+id/descriptionView"
+            app:layout_constraintTop_toBottomOf="@+id/descriptionView" />
+
+        <Spinner
+            android:id="@+id/prioritySpinner"
+            android:layout_width="166dp"
+            android:layout_height="51dp"
+            android:layout_marginStart="60dp"
+            app:layout_constraintBottom_toBottomOf="@+id/priorityLb"
+            app:layout_constraintEnd_toEndOf="@+id/descriptionView"
+            app:layout_constraintStart_toEndOf="@+id/priorityLb"
+            app:layout_constraintTop_toTopOf="@+id/priorityLb" />
+
+        <TextView
+            android:id="@+id/dateLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="52dp"
+            android:text="@string/dateLabelText"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="@+id/priorityLb"
+            app:layout_constraintTop_toBottomOf="@+id/priorityLb" />
+
+        <TextView
+            android:id="@+id/dateView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="changeCalender"
+            android:text="@string/defaultTextView"
+            android:textSize="18dp"
+            app:layout_constraintBottom_toBottomOf="@+id/dateLabel"
+            app:layout_constraintStart_toStartOf="@+id/prioritySpinner"
+            app:layout_constraintTop_toTopOf="@+id/dateLabel"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="52dp"
+            android:text="@string/timeLabelText"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="@+id/dateLabel"
+            app:layout_constraintTop_toBottomOf="@+id/dateLabel" />
+
+        <TextView
+            android:id="@+id/timeView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="changeTime"
+            android:text="@string/defaultTextView"
+            android:textSize="18dp"
+            app:layout_constraintBottom_toBottomOf="@+id/textView6"
+            app:layout_constraintStart_toStartOf="@+id/dateView"
+            app:layout_constraintTop_toTopOf="@+id/textView6"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <TextView
+            android:id="@+id/titleLb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Modify Task"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="@+id/backView"
+            app:layout_constraintEnd_toEndOf="@+id/nameView"
+            app:layout_constraintStart_toStartOf="@+id/nameView"
+            app:layout_constraintTop_toTopOf="@+id/backView"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <ImageView
+            android:id="@+id/backView"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:onClick="returnToMain"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="?attr/actionModeCloseDrawable" />
+
+        <Button
+            android:id="@+id/saveBtn"
+            android:layout_width="305dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="52dp"
+            android:onClick="save"
+            android:text="@string/saveBtnText"
+            android:textAlignment="center"
+            android:textSize="18dp"
+            app:layout_constraintEnd_toEndOf="@+id/descriptionView"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/descriptionView"
+            app:layout_constraintTop_toBottomOf="@+id/textView6" />
+
+        <TextView
+            android:id="@+id/priorityView"
+            android:layout_width="163dp"
+            android:layout_height="32dp"
+            android:textSize="18dp"
+            app:layout_constraintBottom_toBottomOf="@+id/priorityLb"
+            app:layout_constraintStart_toStartOf="@+id/prioritySpinner"
+            app:layout_constraintTop_toTopOf="@+id/priorityLb"
+            app:layout_constraintVertical_bias="0.0" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
