@@ -6,5 +6,13 @@
         <item>High</item>
         <!-- Add more items as needed -->
     </string-array>
-
+    <string name="scrollDescription">Description</string>
+    <!-- Modify Activity -->
+    <string name="nameEditTextDefault">Name</string>
+    <string name="descriptionTextDefault">Description</string>
+    <string name="priorityLabelText">Priority</string>
+    <string name="dateLabelText">Date</string>
+    <string name="defaultTextView">Not Specified</string>
+    <string name="timeLabelText">Time</string>
+    <string name="saveBtnText">Save</string>
 </resources>
