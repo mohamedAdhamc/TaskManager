@@ -16,6 +16,8 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
+
 import java.time.LocalDate;
 import java.util.Calendar;
 
@@ -145,6 +147,8 @@ public class ModifyTaskActivity extends AppCompatActivity {
             builder.show();
         }
         else {
+            String saved = new String("Your Task (" +nameView.getText().toString().trim()+ ") has been saved Successfully!");
+            Toast.makeText(this, saved, Toast.LENGTH_SHORT).show();
             Intent i = new Intent(this, MainActivity.class);
             startActivity(i);
         }
