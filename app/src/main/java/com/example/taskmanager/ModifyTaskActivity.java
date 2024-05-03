@@ -55,7 +55,7 @@ public class ModifyTaskActivity extends AppCompatActivity {
         prioritySpinner.setAdapter(adapter);
         prioritySpinner.setSelection(0);
 
-        //Recieve info from mainActivty
+        //Receive info from mainActivity
         Intent i = getIntent();
         nameView.setText(i.getStringExtra("name"));
 
@@ -92,20 +92,36 @@ public class ModifyTaskActivity extends AppCompatActivity {
             priorityView.setVisibility(View.GONE);
         }
     }
-    public void changeCalender(View v){
-        int currentMonth = LocalDate.now().getMonthValue()-1;
+    public void changeCalender(View v) {
+        int currentMonth = LocalDate.now().getMonthValue() - 1;
         int currentDay = LocalDate.now().getDayOfMonth();
         int currentYear = LocalDate.now().getYear();
         DatePickerDialog datePickerDialog = new DatePickerDialog(this,
                 new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int selectedYear, int selectedMonth, int selectedDayOfMonth) {
-                        currentDate = String.valueOf(selectedDayOfMonth) +'-'+ String.valueOf(selectedMonth+1) + '-'+String.valueOf(selectedYear);
-                        ((TextView)findViewById(R.id.dateView)).setText(currentDate);
-                    }
+                        // Construct selected date string
+                        currentDate = String.valueOf(selectedDayOfMonth) + '-' + String.valueOf(selectedMonth + 1) + '-' + String.valueOf(selectedYear);
 
+                        // Compare selected date with current date
+                        Calendar selectedCalendar = Calendar.getInstance();
+                        selectedCalendar.set(selectedYear, selectedMonth, selectedDayOfMonth);
+                        Calendar currentCalendar = Calendar.getInstance();
+
+                        // Check if the selected date is in the past
+                        if (selectedCalendar.before(currentCalendar)) {
+                            // Show message
+                            AlertDialog.Builder builder = new AlertDialog.Builder(ModifyTaskActivity.this);
+                            builder.setTitle("Incorrect Info").setMessage("Past dates? Future's calling! Let's go!");
+                            builder.show();
+                        } else {
+                            // Update the TextView with the selected date
+                            ((TextView) findViewById(R.id.dateView)).setText(currentDate);
+                        }
+                    }
                 }, currentYear, currentMonth, currentDay);
-        // Show the DatePickerDialog
+
+// Show the DatePickerDialog
         datePickerDialog.show();
     }
     public void changeTime(View v){
@@ -115,6 +131,10 @@ public class ModifyTaskActivity extends AppCompatActivity {
         TimePickerDialog timePickerDialog = new TimePickerDialog(this, new TimePickerDialog.OnTimeSetListener() {
             @Override
             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                Calendar selectedTime = Calendar.getInstance();
+                selectedTime.set(Calendar.HOUR_OF_DAY, hourOfDay);
+                selectedTime.set(Calendar.MINUTE, minute);
+
                 String amPm;
                 if(hourOfDay>=12){
                     amPm = "PM";
@@ -122,9 +142,19 @@ public class ModifyTaskActivity extends AppCompatActivity {
                 else{
                     amPm = "AM";
                 }
-                ((TextView)findViewById(R.id.timeView)).setText((hourOfDay%12)+":"+minute+" "+amPm);
+
+                // Check if selected time is in the past
+                if (selectedTime.before(Calendar.getInstance())) {
+                    // Prompt user to select a future time
+                    // Show message
+                    AlertDialog.Builder builder = new AlertDialog.Builder(ModifyTaskActivity.this);
+                    builder.setTitle("Incorrect Info").setMessage(hourOfDay+":"+minute+amPm+" has passed buddy!");
+                    builder.show();
+                } else {
+                    ((TextView)findViewById(R.id.timeView)).setText((hourOfDay%12)+":"+minute+" "+amPm);
+                }
             }
-        },hour,minutes,false);
+        }, hour, minutes, false);
         timePickerDialog.show();
     }
     public void returnToMain(View v){
@@ -147,7 +177,7 @@ public class ModifyTaskActivity extends AppCompatActivity {
             builder.show();
         }
         else {
-            String saved = new String("Your Task (" +nameView.getText().toString().trim()+ ") has been saved Successfully!");
+            String saved = "Your Task \"" + nameView.getText().toString().trim() + "\" has been saved Successfully!";
             Toast.makeText(this, saved, Toast.LENGTH_SHORT).show();
             Intent i = new Intent(this, MainActivity.class);
             startActivity(i);
