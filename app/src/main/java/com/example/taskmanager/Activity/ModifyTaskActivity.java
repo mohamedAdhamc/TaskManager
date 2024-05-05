@@ -1,4 +1,4 @@
-package com.example.taskmanager;
+package com.example.taskmanager.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.app.AlertDialog;
@@ -18,7 +18,7 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-import com.google.android.material.snackbar.Snackbar;
+import com.example.taskmanager.R;
 
 import java.time.LocalDate;
 import java.util.Calendar;
@@ -162,7 +162,7 @@ public class ModifyTaskActivity extends AppCompatActivity {
         timePickerDialog.show();
     }
     public void returnToMain(View v){
-        Intent i = new Intent(this,MainActivity.class);
+        Intent i = new Intent(this, MainActivity.class);
         startActivity(i);
     }
     public void save(View v){

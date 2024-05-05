@@ -1,10 +1,12 @@
-package com.example.taskmanager;
+package com.example.taskmanager.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+
+import com.example.taskmanager.R;
 
 public class MainActivity extends AppCompatActivity {
     static int x = 0;
@@ -15,12 +17,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void createNewTask(View v){
-        Intent i = new Intent(this,CreateTaskActivity.class);
+        Intent i = new Intent(this, CreateTaskActivity.class);
         startActivity(i);
     }
     //Delete
     public void goToView_Modify(View v){
-        Intent i = new Intent(this,ModifyTaskActivity.class);
+        Intent i = new Intent(this, ModifyTaskActivity.class);
         //
         String taskName = "Planning";
         String date = "20-2-2030";
