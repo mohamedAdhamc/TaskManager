@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="16dp"
+    android:layout_marginVertical="5dp"
+    android:backgroundTint="?attr/Task_background_Color"
+    app:cardCornerRadius="10dp"
+    app:cardElevation="4dp"
+    android:id="@+id/taskCard"
+    android:clickable="true">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="10dp">
+
+        <CheckBox
+            android:id="@+id/checkBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="10dp"
+            android:buttonTint="?attr/Button_background_Color"
+            android:checked="true"
+            android:fontFamily="@font/roboto"
+            android:scaleX="1.5"
+            android:scaleY="1.5"
+            android:textColor="?attr/Text_Color" />
+
+        <TextView
+            android:id="@+id/taskNameView"
+            android:layout_width="165dp"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/checkBox"
+            android:layout_alignBottom="@+id/checkBox"
+            android:layout_marginStart="14dp"
+            android:layout_marginTop="7dp"
+            android:layout_marginBottom="8dp"
+            android:layout_toEndOf="@+id/checkBox"
+            android:fontFamily="@font/roboto"
+            android:text="Task 1"
+            android:textColor="?attr/Text_Color"
+            android:textSize="25sp" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/editTaskFab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/taskNameView"
+            android:layout_alignBottom="@+id/taskNameView"
+            android:layout_marginTop="-2dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="-13dp"
+            android:layout_toStartOf="@+id/deleteTaskFab"
+            android:clickable="true"
+            android:contentDescription="@string/edit_task_btn"
+            android:src="@drawable/baseline_edit_24"
+            app:backgroundTint="?attr/Button_background_Color"
+            app:elevation="10dp"
+            app:fabCustomSize="40sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/deleteTaskFab"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="RelativeOverlap" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/deleteTaskFab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/taskNameView"
+            android:layout_alignBottom="@+id/taskNameView"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="-2dp"
+            android:layout_marginEnd="9dp"
+            android:layout_marginBottom="-13dp"
+            android:clickable="true"
+            android:contentDescription="@string/edit_task_btn"
+            android:src="@drawable/baseline_delete_forever_24"
+            app:backgroundTint="?attr/Button_background_Color"
+            app:elevation="10dp"
+            app:fabCustomSize="40sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/deadlineTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/taskNameView"
+            android:layout_alignStart="@+id/taskNameView"
+            android:layout_marginStart="-2dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="4dp"
+            android:text="Deadline: 10 - 5 - 2024"
+            android:textColor="?attr/Text_Color"
+            android:textSize="18sp" />
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

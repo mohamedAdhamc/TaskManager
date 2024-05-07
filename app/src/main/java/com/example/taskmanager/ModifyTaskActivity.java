@@ -18,13 +18,14 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.example.taskmanager.ui.TaskModel;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.time.LocalDate;
 import java.util.Calendar;
 
 public class ModifyTaskActivity extends AppCompatActivity {
-    private static TextView titleLb;
+    private  TextView titleLb;
     private static EditText nameView;
     private static EditText descriptionView;
     private static Spinner prioritySpinner;
@@ -35,6 +36,7 @@ public class ModifyTaskActivity extends AppCompatActivity {
     String currentPriority = "Low";
     String currentDate = "NotSpecified";
     String currentTime = "non";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,26 +61,26 @@ public class ModifyTaskActivity extends AppCompatActivity {
 
         //Receive info from mainActivity
         Intent i = getIntent();
-        nameView.setText(i.getStringExtra("name"));
+        TaskModel task = (TaskModel) i.getSerializableExtra("task");
 
-        prioritySpinner.setSelection(Integer.valueOf(i.getStringExtra("priority")));
+        assert task != null;
+        nameView.setText(task.getTitle());
+
+        prioritySpinner.setSelection(Integer.parseInt(task.getCurrentPriority()));
         priorityView.setText(prioritySpinner.getSelectedItem().toString());
-        dateView.setText(i.getStringExtra("date"));
-        descriptionView.setText(i.getStringExtra("description"));
-        timeView.setText(i.getStringExtra("time"));
+        dateView.setText(task.getCurrentDate());
+        descriptionView.setText(task.getDescription());
+        timeView.setText(task.getCurrentTime());
         String activityType = i.getStringExtra("activityType");
         titleLb.setText(activityType + " Task");
 
+        assert activityType != null;
         if(activityType.equals("View")){
             nameView.setEnabled(false);
-            nameView.setTextColor(Color.WHITE);
             prioritySpinner.setEnabled(false);
             dateView.setEnabled(false);
-            dateView.setTextColor(Color.WHITE);
             descriptionView.setEnabled(false);
-            descriptionView.setTextColor(Color.WHITE);
             timeView.setEnabled(false);
-            timeView.setTextColor(Color.WHITE);
             saveBtn.setVisibility(View.GONE);
             prioritySpinner.setVisibility(View.GONE);
             priorityView.setVisibility(View.VISIBLE);

@@ -2,4 +2,12 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="Background_Color_Light">#faf9f8</color>
+    <color name="background_Color_Dark">#000000</color>
+    <color name="Task_Background_Light">#FFFFFF</color>
+    <color name="Task_Background_Dark">#323130</color>
+    <color name="Banner_Background_Light">#2563cd</color>
+    <color name="Banner_Background_Dark">#114084</color>
+    <color name="Button_Background_Light">#3A7EF3</color>
+    <color name="Button_Background_Dark">#114084</color>
 </resources>
