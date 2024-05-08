@@ -1,8 +1,14 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources >
     <!-- Base application theme. -->
-    <style name="Base.Theme.TaskManager" parent="Theme.Material3.DayNight.NoActionBar">
+    <style name="Base.Theme.TaskManager" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+<!--        <item name="colorPrimary">@color/Background_Color</item>-->
+        <item name="background_Color">@color/Background_Color_Light</item>
+        <item name="Task_background_Color">@color/Task_Background_Light</item>
+        <item name="Banner_background_Color">@color/Banner_Background_Light</item>
+        <item name="Button_background_Color">@color/Button_Background_Light</item>
+        <item name="Text_Color">@color/black</item>
+        <item name="android:statusBarColor">?attr/Banner_background_Color</item>
     </style>
 
     <style name="Theme.TaskManager" parent="Base.Theme.TaskManager" />

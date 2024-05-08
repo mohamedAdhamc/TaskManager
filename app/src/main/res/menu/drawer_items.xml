@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn = "navigation_view">
+
+    <group
+        android:id="@+id/group1"
+        android:checkableBehavior="single">
+
+     <item
+     android:icon="@drawable/list_check_solid"
+     android:id="@+id/navCurrent"
+     android:title="@string/navCurrentBtn" />
+
+     <item
+         android:icon="@drawable/round_task_completed"
+         android:id="@+id/navCompleted"
+         android:title="@string/navCompleterBtn" />
+    </group>
+
+    <group
+        android:id="@+id/group2"
+        android:checkableBehavior="single">
+
+        <item
+            android:icon="@drawable/gear_solid"
+            android:id="@+id/navSettings"
+            android:title="@string/navSettingsBtn" />
+    </group>
+
+</menu>

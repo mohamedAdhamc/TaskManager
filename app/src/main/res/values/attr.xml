@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="background_Color" format="reference|color"/>
+    <attr name="Task_background_Color" format="reference|color"/>
+    <attr name="Button_background_Color" format="reference|color"/>
+    <attr name="Banner_background_Color" format="reference|color"/>
+    <attr name="Text_Color" format="reference|color"/>
+</resources>

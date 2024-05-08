@@ -1,7 +1,13 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources >
     <!-- Base application theme. -->
-    <style name="Base.Theme.TaskManager" parent="Theme.Material3.DayNight.NoActionBar">
+    <style name="Base.Theme.TaskManager" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Customize your dark theme here. -->
         <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+        <item name="background_Color">@color/background_Color_Dark</item>
+        <item name="Task_background_Color">@color/Task_Background_Dark</item>
+        <item name="Banner_background_Color">@color/Banner_Background_Dark</item>
+        <item name="Button_background_Color">@color/Button_Background_Dark</item>
+        <item name="Text_Color">@color/white</item>
+        <item name="android:statusBarColor">?attr/Banner_background_Color</item>
     </style>
 </resources>
