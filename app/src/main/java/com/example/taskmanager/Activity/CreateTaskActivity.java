@@ -20,9 +20,12 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.example.taskmanager.Database.RoomDB;
 import com.example.taskmanager.R;
+import com.example.taskmanager.Utility.TaskModel;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class CreateTaskActivity extends AppCompatActivity {
     String currentPriority = "Low";
@@ -53,6 +56,12 @@ public class CreateTaskActivity extends AppCompatActivity {
                 // Do nothing
             }
         });
+
+        //for database testing purposes (note that anyways this wouldnt work as you can't directly call db method from the same UI thread)
+//        RoomDB instance = RoomDB.getInstance(getApplicationContext());
+//        instance.taskDAO().insertTask(new TaskModel( 0, "test", "ayyyyy", "", "", "", true));
+//        List<TaskModel> allTasks = instance.taskDAO().getAllTasks();
+//        Log.wtf("DB", allTasks.toString());
     }
 
     public void selectDate(View v) {

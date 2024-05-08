@@ -5,7 +5,6 @@ import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -18,8 +17,7 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-import com.example.taskmanager.ui.TaskModel;
-import com.google.android.material.snackbar.Snackbar;
+import com.example.taskmanager.Utility.TaskModel;
 import com.example.taskmanager.R;
 
 import java.time.LocalDate;

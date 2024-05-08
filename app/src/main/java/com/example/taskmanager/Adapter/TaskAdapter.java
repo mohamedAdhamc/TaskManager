@@ -12,7 +12,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.taskmanager.Activity.ModifyTaskActivity;
 import com.example.taskmanager.R;
-import com.example.taskmanager.ui.TaskModel;
+import com.example.taskmanager.Utility.TaskModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
