@@ -27,8 +27,8 @@ public class CompletedTaskFragment extends Fragment {
         TaskAdapter taskAdapter =  new TaskAdapter(this);
         taskRecyclerView.setAdapter(taskAdapter);
 
-        TaskModel task = new TaskModel(0, 1, "Completed Task", "Dummy Task", "1",
-                "Deadline: 10-5-2024", "10pm");
+        TaskModel task = new TaskModel(1, "Completed Task", "Dummy Task", "1",
+                "Deadline: 10-5-2024", "10pm", true);
 
         List<TaskModel> tasksList = new ArrayList<>();
         tasksList.add(task);

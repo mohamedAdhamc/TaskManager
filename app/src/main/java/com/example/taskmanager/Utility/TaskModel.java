@@ -1,27 +1,42 @@
 package com.example.taskmanager.Utility;
 
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
 import java.io.Serializable;
 
+@Entity (tableName = "task_table")
 public class TaskModel implements Serializable {
-    private int id, status;
+    @PrimaryKey( autoGenerate = true)
+    private int id;
+    @ColumnInfo (name = "status")
+    private int status;
+    @ColumnInfo (name = "title")
     private String title;
+    @ColumnInfo (name = "desc")
     private String description;
+    @ColumnInfo (name = "priority")
     private String currentPriority;
+    @ColumnInfo (name = "date")
     private String currentDate;
+    @ColumnInfo (name = "time")
     private String currentTime;
+    @ColumnInfo (name = "editable")
+    private Boolean editable;
 
     public TaskModel()
     {
 
     }
-    public TaskModel(int id, int status, String title, String description, String currentPriority, String currentDate, String currentTime) {
-        this.id = id;
+    public TaskModel(int status, String title, String description, String currentPriority, String currentDate, String currentTime, Boolean editable) {
         this.status = status;
         this.title = title;
         this.description = description;
         this.currentPriority = currentPriority;
         this.currentDate = currentDate;
         this.currentTime = currentTime;
+        this.editable = editable;
     }
 
 
@@ -80,5 +95,13 @@ public class TaskModel implements Serializable {
 
     public void setCurrentTime(String currentTime) {
         this.currentTime = currentTime;
+    }
+
+    public Boolean getEditable() {
+        return editable;
+    }
+
+    public void setEditable(Boolean editable) {
+        this.editable = editable;
     }
 }

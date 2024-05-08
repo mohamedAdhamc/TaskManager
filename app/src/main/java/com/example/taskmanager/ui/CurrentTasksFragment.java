@@ -34,8 +34,8 @@ public class CurrentTasksFragment extends Fragment {
         taskAdapter =  new TaskAdapter(this);
         taskRecyclerView.setAdapter(taskAdapter);
 
-        TaskModel task = new TaskModel(0, 0, "Test Task", "Dummy Task", "1",
-                "Deadline: 10-5-2024", "10pm");
+        TaskModel task = new TaskModel(0, "Test Task", "Dummy Task", "1",
+                "Deadline: 10-5-2024", "10pm", true);
 
         tasksList = new ArrayList<>();
         tasksList.add(task);
