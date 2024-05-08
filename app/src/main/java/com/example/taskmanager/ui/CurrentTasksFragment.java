@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 
 import com.example.taskmanager.Adapter.TaskAdapter;
 import com.example.taskmanager.R;
+import com.example.taskmanager.Utility.TaskModel;
 
 import java.util.ArrayList;
 import java.util.List;
