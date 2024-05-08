@@ -1,4 +1,4 @@
-package com.example.taskmanager;
+package com.example.taskmanager.Activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,7 +10,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
-
+import com.example.taskmanager.R;
 import com.example.taskmanager.ui.CompletedTaskFragment;
 import com.example.taskmanager.ui.CurrentTasksFragment;
 import com.google.android.material.navigation.NavigationView;

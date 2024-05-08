@@ -1,4 +1,4 @@
-package com.example.taskmanager;
+package com.example.taskmanager.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.app.AlertDialog;
@@ -20,12 +20,13 @@ import android.widget.Toast;
 
 import com.example.taskmanager.ui.TaskModel;
 import com.google.android.material.snackbar.Snackbar;
+import com.example.taskmanager.R;
 
 import java.time.LocalDate;
 import java.util.Calendar;
 
 public class ModifyTaskActivity extends AppCompatActivity {
-    private  TextView titleLb;
+    private static TextView titleLb;
     private static EditText nameView;
     private static EditText descriptionView;
     private static Spinner prioritySpinner;

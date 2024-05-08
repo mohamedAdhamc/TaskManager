@@ -1,4 +1,4 @@
-package com.example.taskmanager;
+package com.example.taskmanager.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -19,6 +19,9 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
+
+import com.example.taskmanager.R;
+
 import java.time.LocalDate;
 
 public class CreateTaskActivity extends AppCompatActivity {

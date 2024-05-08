@@ -12,7 +12,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:context=".ModifyTaskActivity">
+        tools:context=".Activity.ModifyTaskActivity">
         <EditText
             android:id="@+id/nameView"
             android:layout_width="305dp"
