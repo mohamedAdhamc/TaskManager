@@ -162,6 +162,11 @@ public class ModifyTaskActivity extends AppCompatActivity {
         timePickerDialog.show();
     }
 
+    public void returnToMain(View v)
+    {
+        finish();
+    }
+
     public void save(View v) {
         String name = nameView.getText().toString().trim();
         String description = descriptionView.getText().toString();
