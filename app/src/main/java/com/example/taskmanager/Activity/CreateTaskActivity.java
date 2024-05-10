@@ -1,36 +1,29 @@
 package com.example.taskmanager.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.AdapterView;
-import android.widget.Button;
-import android.widget.DatePicker;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.TimePicker;
 import android.widget.Toast;
-
 import com.example.taskmanager.Database.RoomDB;
 import com.example.taskmanager.R;
 import com.example.taskmanager.Utility.TaskModel;
-
 import java.time.LocalDate;
-import java.util.List;
+
 
 public class CreateTaskActivity extends AppCompatActivity {
     String currentPriority = "Low";
-    String currentDate = "non";
-    String currentTime = "non";
+    String currentDate = "Not defined";
+    String currentTime = "Not defined";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,9 +39,7 @@ public class CreateTaskActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
                 // Perform action on item selection
-                String selectedItem = parentView.getItemAtPosition(position).toString();
-                // Do something with the selected item
-                currentPriority = selectedItem;
+                currentPriority = parentView.getItemAtPosition(position).toString();
             }
 
             @Override
@@ -56,28 +47,18 @@ public class CreateTaskActivity extends AppCompatActivity {
                 // Do nothing
             }
         });
-
-        //for database testing purposes (note that anyways this wouldnt work as you can't directly call db method from the same UI thread)
-//        RoomDB instance = RoomDB.getInstance(getApplicationContext());
-//        instance.taskDAO().insertTask(new TaskModel( 0, "test", "ayyyyy", "", "", "", true));
-//        List<TaskModel> allTasks = instance.taskDAO().getAllTasks();
-//        Log.wtf("DB", allTasks.toString());
     }
 
     public void selectDate(View v) {
-        int currentMonth = LocalDate.now().getMonthValue()-1;
+        int currentMonth = LocalDate.now().getMonthValue() - 1;
         int currentDay = LocalDate.now().getDayOfMonth();
         int currentYear = LocalDate.now().getYear();
         DatePickerDialog datePickerDialog = new DatePickerDialog(this,
-                new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker view, int selectedYear, int selectedMonth, int selectedDayOfMonth) {
-                        currentDate = String.valueOf(selectedDayOfMonth) +'-'+ String.valueOf(selectedMonth+1) + '-'+String.valueOf(selectedYear);
-                        TextView currDateText = findViewById(R.id.dateText);
-                        currDateText.setText(currentDate);
-                        ((Button)findViewById(R.id.timeSelectButton)).setEnabled(true);
-                    }
-
+                (view, selectedYear, selectedMonth, selectedDayOfMonth) -> {
+                    currentDate = String.valueOf(selectedDayOfMonth) + '-' + (selectedMonth + 1) + '-' + selectedYear;
+                    TextView currDateText = findViewById(R.id.dateText);
+                    currDateText.setText(currentDate);
+                    findViewById(R.id.timeSelectButton).setEnabled(true);
                 }, currentYear, currentMonth, currentDay);
 
         // Show the DatePickerDialog
@@ -85,48 +66,43 @@ public class CreateTaskActivity extends AppCompatActivity {
         datePickerDialog.show();
     }
 
-    public void selectTime(View v){
+    public void selectTime(View v) {
         // Get current hour and minute
 
         // Create a TimePickerDialog and set its listener
         TimePickerDialog timePickerDialog = new TimePickerDialog(this,
-                new TimePickerDialog.OnTimeSetListener() {
-                    @Override
-                    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                        // Update currentTime with the selected time
-                        currentTime = String.valueOf(hourOfDay)+":"+String.valueOf(minute);
-                        // Update TextView to display the selected time
-                        TextView currTimeText = findViewById(R.id.timeText);
-                        currTimeText.setText(currentTime);
-                    }
+                (view, hourOfDay, minute) -> {
+                    // Update currentTime with the selected time
+                    currentTime = hourOfDay + ":" + minute;
+                    // Update TextView to display the selected time
+                    TextView currTimeText = findViewById(R.id.timeText);
+                    currTimeText.setText(currentTime);
                 }, 6, 0, true);
 
         // Show the TimePickerDialog
         timePickerDialog.show();
     }
 
-    public void saveToLocalDB(View v){
-        String name = ((EditText)findViewById(R.id.editTextText)).getText().toString();
-        String description = ((EditText)findViewById(R.id.editTextTextMultiLine)).getText().toString();
+    public void saveToLocalDB(View v) {
+        String name = ((EditText) findViewById(R.id.editTextText)).getText().toString();
+        String description = ((EditText) findViewById(R.id.editTextTextMultiLine)).getText().toString();
         String priority = currentPriority;
         String date = currentDate;
+        Boolean editable = ((CheckBox)findViewById(R.id.checkBox2)).isChecked();
 
-        if(name.isEmpty()){
-            Toast.makeText(this,"Please fill the name field",Toast.LENGTH_LONG).show();
-        }
-        else if(description.isEmpty()){
-            Toast.makeText(this,"Please fill the description field",Toast.LENGTH_LONG).show();
-        }
-        else{
-//            Toast.makeText(this,currentDate,Toast.LENGTH_LONG).show();
-//            Toast.makeText(this,currentTime,Toast.LENGTH_LONG).show();
+        if (name.isEmpty()) {
+            Log.d("DB_Task_Insertion", "NAME ERROR");
+            Toast.makeText(this, "Please fill the name field", Toast.LENGTH_LONG).show();
+        } else if (description.isEmpty()) {
+            Log.d("DB_Task_Insertion", "desc ERROR");
+            Toast.makeText(this, "Please fill the description field", Toast.LENGTH_LONG).show();
+        } else {
+            TaskModel task = new TaskModel(0, name, description, priority, date, currentTime, editable);
 
-            //Pass the items to local DB
-            ////////////////
-            ///////////////
-            /////////////
-            ///////////
+            RoomDB instance = RoomDB.getInstance(this);
+            new Thread(() -> instance.taskDAO().insertTask(task)).start();
 
+            finish();
         }
     }
 }

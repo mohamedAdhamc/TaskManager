@@ -2,8 +2,8 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="412dp"
-    android:layout_height="730dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     tools:layout_editor_absoluteX="-2dp"
     tools:layout_editor_absoluteY="1dp">
 
@@ -18,7 +18,7 @@
             android:layout_height="146dp"
             android:layout_marginStart="56dp"
             android:layout_marginTop="80dp"
-            android:text="What's on your mind today?"
+            android:text="@string/Create_Task_Title"
             android:textSize="34sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -30,22 +30,23 @@
             android:layout_marginStart="56dp"
             android:layout_marginTop="24dp"
             android:ems="10"
-            android:hint="Name"
+            android:hint="@string/Task_Name_Hint"
             android:inputType="text"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView" />
+            app:layout_constraintTop_toBottomOf="@+id/textView"
+            android:autofillHints="@string/Task_Name_Hint" />
 
         <Button
             android:id="@+id/button"
             style="@style/Widget.Material3.Button.UnelevatedButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="56dp"
-            android:layout_marginTop="28dp"
+            android:layout_marginTop="20dp"
             android:onClick="saveToLocalDB"
-            android:text="Save"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/timeText" />
+            android:textSize="20sp"
+            android:text="@string/Save_Task_Title"
+            app:layout_constraintStart_toStartOf="@+id/checkBox2"
+            app:layout_constraintTop_toBottomOf="@+id/checkBox2" />
 
         <EditText
             android:id="@+id/editTextTextMultiLine"
@@ -55,20 +56,21 @@
             android:layout_marginTop="32dp"
             android:ems="10"
             android:gravity="start|top"
-            android:hint="Discribtion"
+            android:hint="@string/Task_Description_Hint"
             android:inputType="textMultiLine"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextText" />
+            app:layout_constraintTop_toBottomOf="@+id/editTextText"
+            android:autofillHints="@string/Task_Description_Hint" />
 
         <Spinner
             android:id="@+id/spinner"
             android:layout_width="136dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="56dp"
-            android:layout_marginTop="28dp"
+            android:layout_marginStart="96dp"
+            android:layout_marginTop="16dp"
             android:textAlignment="textStart"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView2" />
+            app:layout_constraintStart_toEndOf="@+id/textView2"
+            app:layout_constraintTop_toBottomOf="@id/editTextTextMultiLine" />
 
         <TextView
             android:id="@+id/textView2"
@@ -76,7 +78,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="56dp"
             android:layout_marginTop="16dp"
-            android:text="Priority"
+            android:text="@string/Task_Priority"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/editTextTextMultiLine" />
 
@@ -86,7 +88,7 @@
             android:layout_height="24dp"
             android:layout_marginStart="56dp"
             android:layout_marginTop="28dp"
-            android:text="(optional) Date"
+            android:text="@string/Task_Date"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/spinner" />
 
@@ -98,7 +100,7 @@
             android:layout_marginStart="32dp"
             android:layout_marginTop="20dp"
             android:onClick="selectDate"
-            android:text="Select"
+            android:text="@string/Select_Btn_Title"
             app:layout_constraintStart_toEndOf="@+id/dateText"
             app:layout_constraintTop_toBottomOf="@+id/spinner" />
 
@@ -108,9 +110,25 @@
             android:layout_height="22dp"
             android:layout_marginStart="56dp"
             android:layout_marginTop="28dp"
-            android:text="(optional) Time"
+            android:text="@string/Task_Time"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/dateText" />
+
+        <CheckBox
+            android:id="@+id/checkBox2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:buttonTint="?attr/Button_background_Color"
+            android:checked="true"
+            android:scaleX="1.5"
+            android:scaleY="1.5"
+            android:text="@string/Editable_Checkbox"
+            android:textColor="?attr/Text_Color"
+            app:layout_constraintEnd_toEndOf="@+id/timeText"
+            app:layout_constraintHorizontal_bias="0.275"
+            app:layout_constraintStart_toStartOf="@+id/timeText"
+            app:layout_constraintTop_toBottomOf="@+id/timeText" />
 
         <Button
             android:id="@+id/timeSelectButton"
@@ -121,7 +139,7 @@
             android:layout_marginTop="16dp"
             android:enabled="false"
             android:onClick="selectTime"
-            android:text="Select"
+            android:text="@string/Select_Btn_Title"
             app:layout_constraintStart_toEndOf="@+id/timeText"
             app:layout_constraintTop_toBottomOf="@+id/dateButton" />
 

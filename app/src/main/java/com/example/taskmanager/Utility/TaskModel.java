@@ -29,7 +29,8 @@ public class TaskModel implements Serializable {
     {
 
     }
-    public TaskModel(int status, String title, String description, String currentPriority, String currentDate, String currentTime, Boolean editable) {
+    public TaskModel(int status, String title, String description,
+                     String currentPriority, String currentDate, String currentTime, Boolean editable) {
         this.status = status;
         this.title = title;
         this.description = description;

@@ -8,11 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.example.taskmanager.Adapter.TaskAdapter;
+import com.example.taskmanager.Database.RoomDB;
 import com.example.taskmanager.R;
-import com.example.taskmanager.Utility.TaskModel;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class CompletedTaskFragment extends Fragment {
     @Override
@@ -27,15 +24,8 @@ public class CompletedTaskFragment extends Fragment {
         TaskAdapter taskAdapter =  new TaskAdapter(this);
         taskRecyclerView.setAdapter(taskAdapter);
 
-        TaskModel task = new TaskModel(1, "Completed Task", "Dummy Task", "1",
-                "Deadline: 10-5-2024", "10pm", true);
-
-        List<TaskModel> tasksList = new ArrayList<>();
-        tasksList.add(task);
-        tasksList.add(task);
-        tasksList.add(task);
-
-        taskAdapter.setTasks(tasksList);
+        RoomDB instance = RoomDB.getInstance(requireContext());
+        instance.taskDAO().getAllCompletedTasks().observe(getViewLifecycleOwner(), taskAdapter::setTasks);
 
         return rootView;
     }

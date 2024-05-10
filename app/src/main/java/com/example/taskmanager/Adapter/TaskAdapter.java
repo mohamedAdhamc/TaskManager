@@ -1,16 +1,20 @@
 package com.example.taskmanager.Adapter;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.taskmanager.Activity.ModifyTaskActivity;
+import com.example.taskmanager.Database.RoomDB;
 import com.example.taskmanager.R;
 import com.example.taskmanager.Utility.TaskModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -22,9 +26,11 @@ import androidx.fragment.app.Fragment;
 public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
     private List<TaskModel> tasksList;
     private final Fragment tasksFragment;
+    private final RoomDB instance;
 
     public TaskAdapter(Fragment fragment) {
         this.tasksFragment = fragment;
+        instance = RoomDB.getInstance(tasksFragment.getContext());
     }
 
     @NonNull
@@ -40,18 +46,37 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
     public void onBindViewHolder(@NonNull TaskAdapter.ViewHolder holder, int position) {
 
         TaskModel task = tasksList.get(position);
+
         holder.title.setText(task.getTitle());
-        holder.deadline.setText(task.getCurrentDate());
+
+        if (!task.getCurrentDate().equals("Not defined")) {
+            Context context = tasksFragment.requireContext();
+            holder.deadline.setText(String.format(context.getString(R.string.deadline), task.getCurrentDate()));
+        }
+
         holder.checkBox.setChecked(toBoolean(task.getStatus()));
-        holder.editBtn.setOnClickListener(v -> goTo_ModifyActivity(task));
+        holder.checkBox.setOnClickListener(v ->changeTaskStatus(task, v));
+
+        if (task.getEditable() && task.getStatus() == 0)  {
+            holder.editBtn.setOnClickListener(v -> goTo_ModifyActivity(task));
+        } else {
+            holder.editBtn.setVisibility(View.INVISIBLE);
+        }
+
         holder.deleteBtn.setOnClickListener(v -> deleteTask(position));
         holder.cardView.setOnClickListener(v -> goTo_ViewActivity(task));
-
     }
 
     @Override
     public int getItemCount() {
-        return tasksList.size();
+        int size;
+
+        if (tasksList == null) {
+            size = 0;
+        } else {
+            size = tasksList.size();
+        }
+        return size;
     }
 
     @SuppressLint("NotifyDataSetChanged")
@@ -60,6 +85,15 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
         notifyDataSetChanged();
     }
 
+    private void changeTaskStatus(TaskModel task, View v) {
+        if (((CheckBox) v).isChecked()) {
+            task.setStatus(1);
+        } else {
+            task.setStatus(0);
+        }
+
+        new Thread(() -> instance.taskDAO().updateTask(task)).start();
+    }
 
     private void goTo_ModifyActivity(TaskModel task) {
         Intent intent = new Intent(tasksFragment.getActivity(), ModifyTaskActivity.class);
@@ -85,7 +119,11 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
 
     private void deleteTask(int position) {
         // Remove item from dataset
-        tasksList.remove(position);
+        TaskModel task = tasksList.get(position);
+
+
+        new Thread(() -> instance.taskDAO().deleteTask(task)).start();
+
         // Notify adapter of item removal
         notifyItemRemoved(position);
         // Prevents the app from closing after deleting all all the tasks
