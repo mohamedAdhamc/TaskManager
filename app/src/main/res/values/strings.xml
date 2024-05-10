@@ -27,4 +27,14 @@
     <string name="completedFragmentTitle">Completed Tasks</string>
     <string name="delete_task_btn">delete task</string>
     <string name="edit_task_btn">edit task</string>
+    <string name="Create_Task_Title">What\'s on your mind today?</string>
+    <string name="Task_Name_Hint">Name</string>
+    <string name="Save_Task_Title">Save</string>
+    <string name="Task_Description_Hint">Description</string>
+    <string name="Task_Priority">Priority</string>
+    <string name="Task_Date">(optional) Date</string>
+    <string name="Select_Btn_Title">Select</string>
+    <string name="Task_Time">(optional) Time</string>
+    <string name="Editable_Checkbox">Editable</string>
+    <string name="deadline">"Deadline: %1$s"</string>
 </resources>

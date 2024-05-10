@@ -1,13 +1,12 @@
 package com.example.taskmanager.Database;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
-
 import com.example.taskmanager.Utility.TaskModel;
-
 import java.util.List;
 
 @Dao
@@ -22,14 +21,14 @@ public interface TaskDAO {
     void updateTask(TaskModel task);
 
     @Query("SELECT * FROM task_table")
-    List<TaskModel> getAllTasks();
+    LiveData<List<TaskModel>> getAllTasks();
 
     @Query("SELECT * FROM task_table WHERE id LIKE :taskId")
-    TaskModel findTaskById(int taskId);
+    TaskModel findTaskByIrd(int taskId);
 
     @Query("SELECT * FROM task_table WHERE status LIKE 0")
-    List<TaskModel> getAllOngoingTasks();
+    LiveData<List<TaskModel>> getAllOngoingTasks();
 
     @Query("SELECT * FROM task_table WHERE status LIKE 1")
-    List<TaskModel> getAllCompletedTasks();
+    LiveData<List<TaskModel>> getAllCompletedTasks();
 }
