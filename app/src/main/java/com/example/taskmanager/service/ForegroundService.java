@@ -1,5 +1,7 @@
 package com.example.taskmanager.service;
 
+import static androidx.core.content.ContentProviderCompat.requireContext;
+
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -12,14 +14,25 @@ import android.os.IBinder;
 import android.util.Log;
 
 import androidx.core.app.NotificationCompat;
+import androidx.lifecycle.LifecycleOwner;
+
+import com.example.taskmanager.Database.RoomDB;
+import com.example.taskmanager.Utility.TaskModel;
+
+import java.util.List;
 
 public class ForegroundService extends Service {
 
     private static final String CHANNEL_ID = "notification_channel";
 
+    private RoomDB instance;
+
+    private static List<TaskModel> tasks;
+
     @Override
     public void onCreate() {
         super.onCreate();
+        instance = RoomDB.getInstance(getApplicationContext());
     }
 
     @Override
@@ -33,7 +46,13 @@ public class ForegroundService extends Service {
                 .build();
         startForeground(1, notification);
         timer.start();
+        instance.taskDAO().getAllOngoingTasks().observeForever( ForegroundService::updateTasks);
         return START_STICKY;
+    }
+
+    private static void updateTasks(List<TaskModel> taskModels) {
+        Log.wtf("foreground", "update tasks called");
+        tasks = taskModels;
     }
 
     public static void startService (Context context) {
@@ -57,6 +76,18 @@ public class ForegroundService extends Service {
         public void onFinish() {
             //generate the notifications
             Log.wtf("notificationz", "test");
+            for(TaskModel task: tasks){
+                if (task.getCurrentPriority().contains("Low")){
+                    //check deadline if multiple of 24 hours remaining send a notification
+
+                } else if (task.getCurrentPriority().contains("Medium")){
+                    //check deadline if multiple of 5 hours remaining send a notification
+
+                } else if (task.getCurrentPriority().contains("High")) {
+                    //check deadline if multiple of 1 hours remaining send a notification
+                }
+            }
+
             start();
         }
     };
