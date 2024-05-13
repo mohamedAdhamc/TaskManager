@@ -18,8 +18,13 @@ import android.widget.TimePicker;
 import com.example.taskmanager.Database.RoomDB;
 import com.example.taskmanager.Utility.TaskModel;
 import com.example.taskmanager.R;
+
+import java.text.ParseException;
 import java.time.LocalDate;
 import java.util.Calendar;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 
 public class ModifyTaskActivity extends AppCompatActivity {
     private static TextView titleLb;
@@ -139,6 +144,22 @@ public class ModifyTaskActivity extends AppCompatActivity {
                 // USE DATE STORED HERE
                 selectedTime.set(Calendar.HOUR_OF_DAY, hourOfDay);
                 selectedTime.set(Calendar.MINUTE, minute);
+
+                try{
+                    String selectedDate = ((TextView)findViewById(R.id.dateView)).getText().toString();
+                    // Define the date format to match the string
+                    SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+                    Date date = sdf.parse(selectedDate);
+                    // Extract day, month, and year from the Date object
+                    int day = date.getDate();
+                    int month = date.getMonth() + 1; // Adding 1 because month index starts from 0
+                    int year = date.getYear() + 1900; // Adding 1900 because getYear() returns years since 1900
+                    selectedTime.set(year,month,day);
+
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
 
                 String amPm;
                 if (hourOfDay >= 12) {
