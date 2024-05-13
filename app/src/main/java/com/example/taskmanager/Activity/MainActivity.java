@@ -5,11 +5,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import android.content.Intent;
+import android.icu.text.RelativeDateTimeFormatter;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import com.example.taskmanager.R;
+import com.example.taskmanager.service.ForegroundService;
 import com.example.taskmanager.ui.CompletedTaskFragment;
 import com.example.taskmanager.ui.CurrentTasksFragment;
 import com.google.android.material.navigation.NavigationView;
@@ -35,6 +37,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new CurrentTasksFragment()).commit();
         }
+        startForegroundService();
     }
 
     public void createNewTask(View v){
@@ -59,5 +62,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void startForegroundService() {
+        //start foreground service
+        Intent foregroundIntent = new Intent(this, ForegroundService.class);
+        getApplicationContext().startForegroundService(foregroundIntent);
     }
 }
