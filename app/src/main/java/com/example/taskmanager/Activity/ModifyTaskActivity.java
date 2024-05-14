@@ -166,7 +166,7 @@ public class ModifyTaskActivity extends AppCompatActivity {
                     // Prompt user to select a future time
                     // Show message
                     AlertDialog.Builder builder = new AlertDialog.Builder(ModifyTaskActivity.this);
-                    builder.setTitle("Incorrect Info").setMessage(hourOfDay + ":" + minute + amPm + " has passed buddy!");
+                    builder.setTitle("Incorrect Info").setMessage((hourOfDay%12) + ":" + minute + amPm + " has passed buddy!");
                     builder.show();
                 } else {
                     ((TextView) findViewById(R.id.timeView)).setText((hourOfDay % 12) + ":" + minute + " " + amPm);
