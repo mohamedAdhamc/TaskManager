@@ -7,6 +7,7 @@ import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -140,26 +141,18 @@ public class ModifyTaskActivity extends AppCompatActivity {
             @Override
             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                 Calendar selectedTime = Calendar.getInstance();
-                // TO DO:
-                // USE DATE STORED HERE
-                selectedTime.set(Calendar.HOUR_OF_DAY, hourOfDay);
-                selectedTime.set(Calendar.MINUTE, minute);
-
                 try{
                     String selectedDate = ((TextView)findViewById(R.id.dateView)).getText().toString();
                     // Define the date format to match the string
                     SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
                     Date date = sdf.parse(selectedDate);
-                    // Extract day, month, and year from the Date object
-                    int day = date.getDate();
-                    int month = date.getMonth() + 1; // Adding 1 because month index starts from 0
-                    int year = date.getYear() + 1900; // Adding 1900 because getYear() returns years since 1900
-                    selectedTime.set(year,month,day);
-
+                    selectedTime.setTime(date);
+                    selectedTime.set(Calendar.HOUR_OF_DAY, hourOfDay);
+                    selectedTime.set(Calendar.MINUTE, minute);
+                    Log.i("timechange",selectedTime.getTime().toString());
             } catch (ParseException e) {
                 e.printStackTrace();
             }
-
 
                 String amPm;
                 if (hourOfDay >= 12) {
