@@ -16,6 +16,8 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
+
 import com.example.taskmanager.Database.RoomDB;
 import com.example.taskmanager.Utility.TaskModel;
 import com.example.taskmanager.R;
@@ -203,6 +205,9 @@ public class ModifyTaskActivity extends AppCompatActivity {
             task.setCurrentPriority(prioritySpinner.getSelectedItem().toString());
 
             RoomDB instance = RoomDB.getInstance(this);
+
+            Toast.makeText(getApplicationContext(),"Your task \""+name+"\" has been saved successfully!"
+                    , Toast.LENGTH_SHORT).show();
 
             new Thread(() -> instance.taskDAO().updateTask(task)).start();
 
