@@ -7,6 +7,7 @@ import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -15,11 +16,18 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
+
 import com.example.taskmanager.Database.RoomDB;
 import com.example.taskmanager.Utility.TaskModel;
 import com.example.taskmanager.R;
+
+import java.text.ParseException;
 import java.time.LocalDate;
 import java.util.Calendar;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 
 public class ModifyTaskActivity extends AppCompatActivity {
     private static TextView titleLb;
@@ -135,10 +143,18 @@ public class ModifyTaskActivity extends AppCompatActivity {
             @Override
             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                 Calendar selectedTime = Calendar.getInstance();
-                // TO DO:
-                // USE DATE STORED HERE
-                selectedTime.set(Calendar.HOUR_OF_DAY, hourOfDay);
-                selectedTime.set(Calendar.MINUTE, minute);
+                try{
+                    String selectedDate = ((TextView)findViewById(R.id.dateView)).getText().toString();
+                    // Define the date format to match the string
+                    SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+                    Date date = sdf.parse(selectedDate);
+                    selectedTime.setTime(date);
+                    selectedTime.set(Calendar.HOUR_OF_DAY, hourOfDay);
+                    selectedTime.set(Calendar.MINUTE, minute);
+                    Log.i("timechange",selectedTime.getTime().toString());
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
 
                 String amPm;
                 if (hourOfDay >= 12) {
@@ -152,7 +168,7 @@ public class ModifyTaskActivity extends AppCompatActivity {
                     // Prompt user to select a future time
                     // Show message
                     AlertDialog.Builder builder = new AlertDialog.Builder(ModifyTaskActivity.this);
-                    builder.setTitle("Incorrect Info").setMessage(hourOfDay + ":" + minute + amPm + " has passed buddy!");
+                    builder.setTitle("Incorrect Info").setMessage((hourOfDay%12) + ":" + minute + amPm + " has passed buddy!");
                     builder.show();
                 } else {
                     ((TextView) findViewById(R.id.timeView)).setText((hourOfDay % 12) + ":" + minute + " " + amPm);
@@ -189,6 +205,9 @@ public class ModifyTaskActivity extends AppCompatActivity {
             task.setCurrentPriority(prioritySpinner.getSelectedItem().toString());
 
             RoomDB instance = RoomDB.getInstance(this);
+
+            Toast.makeText(getApplicationContext(),"Your task \""+name+"\" has been saved successfully!"
+                    , Toast.LENGTH_SHORT).show();
 
             new Thread(() -> instance.taskDAO().updateTask(task)).start();
 
